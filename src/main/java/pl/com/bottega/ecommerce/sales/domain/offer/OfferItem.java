@@ -26,10 +26,7 @@ public class OfferItem {
 
 	private Money money;
 
-	// discount
-	private String discountCause;
-
-	private BigDecimal discount;
+	private DiscountData totalDiscount;
 
 	public OfferItem(String productId, Money productPrice, String productName, Date productSnapshotDate,
 			String productType, int quantity) {
@@ -41,8 +38,7 @@ public class OfferItem {
 		productData = new ProductData(productId, productPrice, productName, productSnapshotDate, productType);
 
 		this.quantity = quantity;
-		this.discount = discount;
-		this.discountCause = discountCause;
+		totalDiscount = new DiscountData(discountCause, discount);
 
 		BigDecimal discountValue = new BigDecimal(0);
 		if (discount != null)
@@ -56,11 +52,11 @@ public class OfferItem {
 	}
 
 	public BigDecimal getDiscount() {
-		return discount;
+		return totalDiscount.discount;
 	}
 
 	public String getDiscountCause() {
-		return discountCause;
+		return totalDiscount.discountCause;
 	}
 
 	public int getQuantity() {
@@ -71,7 +67,7 @@ public class OfferItem {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((discount == null) ? 0 : discount.hashCode());
+		result = prime * result + ((totalDiscount.discount == null) ? 0 : totalDiscount.discount.hashCode());
 		result = prime * result + ((productData.productName == null) ? 0 : productData.productName.hashCode());
 		result = prime * result + ((productData.productPrice == null) ? 0 : productData.productPrice.hashCode());
 		result = prime * result + ((productData.productId == null) ? 0 : productData.productId.hashCode());
@@ -90,10 +86,10 @@ public class OfferItem {
 		if (getClass() != obj.getClass())
 			return false;
 		OfferItem other = (OfferItem) obj;
-		if (discount == null) {
-			if (other.discount != null)
+		if (totalDiscount.discount == null) {
+			if (other.totalDiscount.discount != null)
 				return false;
-		} else if (!discount.equals(other.discount))
+		} else if (!totalDiscount.discount.equals(other.totalDiscount.discount))
 			return false;
 		if (productData.productName == null) {
 			if (other.productData.productName != null)
