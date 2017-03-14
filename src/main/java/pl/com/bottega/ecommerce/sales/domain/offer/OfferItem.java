@@ -31,12 +31,12 @@ public class OfferItem {
 
 	private BigDecimal discount;
 
-	public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
+	public OfferItem(String productId, Money productPrice, String productName, Date productSnapshotDate,
 			String productType, int quantity) {
 		this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
 	}
 
-	public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
+	public OfferItem(String productId, Money productPrice, String productName, Date productSnapshotDate,
 			String productType, int quantity, BigDecimal discount, String discountCause) {
 		productData = new ProductData(productId, productPrice, productName, productSnapshotDate, productType);
 
@@ -48,35 +48,11 @@ public class OfferItem {
 		if (discount != null)
 			discountValue = discountValue.subtract(discount);
 
-		this.money.totalCost = productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue);
+		this.money.totalCost = productPrice.totalCost.multiply(new BigDecimal(quantity)).subtract(discountValue);
 	}
 
-	public String getProductId() {
-		return productData.productId;
-	}
-
-	public BigDecimal getProductPrice() {
-		return productData.productPrice;
-	}
-
-	public String getProductName() {
-		return productData.productName;
-	}
-
-	public Date getProductSnapshotDate() {
-		return productData.productSnapshotDate;
-	}
-
-	public String getProductType() {
-		return productData.productType;
-	}
-
-	public BigDecimal getTotalCost() {
-		return money.totalCost;
-	}
-
-	public String getTotalCostCurrency() {
-		return money.currency;
+	public ProductData getProductData() {
+		return productData;
 	}
 
 	public BigDecimal getDiscount() {

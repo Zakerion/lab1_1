@@ -5,12 +5,12 @@ import java.util.Date;
 
 public class ProductData {
 	public String productId;
-	public BigDecimal productPrice;
+	public Money productPrice;
 	public String productName;
 	public Date productSnapshotDate;
 	public String productType;
 
-	public ProductData(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
+	public ProductData(String productId, Money productPrice, String productName, Date productSnapshotDate,
 			String productType) {
 		this.productId = productId;
 		this.productPrice = productPrice;
